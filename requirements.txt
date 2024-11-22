@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+openai
+python-multipart
+PyPDF2
+python-docx
+tika
+faiss-cpu   # or faiss-gpu if using GPU
+numpy
+tiktoken
+python-dotenv
