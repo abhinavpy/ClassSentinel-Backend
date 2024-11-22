@@ -9,3 +9,4 @@ faiss-cpu   # or faiss-gpu if using GPU
 numpy
 tiktoken
 python-dotenv
+guardrails-ai
