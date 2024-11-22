@@ -169,9 +169,16 @@ async def chat_endpoint(request: ChatRequest):
                 print(f"Index {idx} is out of bounds for document_chunks with length {len(document_chunks)}")
 
         # Construct the prompt
+        system_prompt = """
+You are an assistant that answers questions based solely on the provided information.
+Do not use any external knowledge or provide any information not contained in the provided text.
+If you don't know the answer based on the information, respond with "I'm sorry, I don't know the answer to that question."
+"""
+
         prompt = f"""{guardrails}
 
-Use the following information to answer the question.
+Please answer the following question using only the information below.
+If the answer is not contained in the information, say "I'm sorry, I don't know the answer to that question."
 
 Information:
 {retrieved_text}
