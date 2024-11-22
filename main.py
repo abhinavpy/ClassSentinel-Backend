@@ -246,3 +246,31 @@ async def upload_endpoint(file: UploadFile = File(...)):
     except Exception as e:
         print(f"Error during upload: {e}")
         raise HTTPException(status_code=500, detail="An error occurred while uploading and processing the file.")
+
+@app.get("/guardrails")
+async def get_guardrails():
+    try:
+        if os.path.exists('guardrails.txt'):
+            with open('guardrails.txt', 'r') as f:
+                guardrails = f.read()
+        else:
+            guardrails = ''
+        return {"guardrails": guardrails}
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="An error occurred while retrieving guardrails.")
+    
+
+@app.post("/guardrails/clear")
+async def clear_guardrails():
+    try:
+        if os.path.exists('guardrails.txt'):
+            # Option 1: Delete the guardrails.txt file
+            # os.remove('guardrails.txt')
+            # Option 2: Alternatively, empty the file content
+            with open('guardrails.txt', 'w') as f:
+                f.write('')
+        return {"message": "Guardrails have been cleared."}
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="An error occurred while clearing guardrails.")
